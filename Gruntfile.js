@@ -23,10 +23,23 @@ module.exports = function(grunt) {
                 src: ['js/**/*.js']
             }
         },
+        
+        concat: {
+            options: {
+                stripBanners: true,
+                banner: '/* <%= pkg.name %> -v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */'
+            },
+            
+            dists: {
+                src: ['js/file1.js', 'js/file2.js'],
+                dest: 'dest/build.js'
+            }
+        }
     });
     
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     
-    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('default', ['jshint', 'concat']);
     grunt.registerTask('test', ['']);
 };
