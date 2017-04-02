@@ -57,13 +57,20 @@ module.exports = function(grunt) {
         watch: {
             scripts: {
                  files: ['js/*.js'],  
-                 tasks: ['jshint', 'concat', 'uglify'] 
+                 tasks: ['jshint', 'concat', 'uglify', 'removelogging'] 
             },
             css: {
                  files: ['css/*.css'],  
                  tasks: ['cssmin']
             }
               
+        },
+        
+        removelogging: {
+            dist: {
+                src: "dest/build.min.js",
+                dest: "dest/build.clean.js"
+            }
         }
     });
     
@@ -74,7 +81,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-remove-logging');
     
-    grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'cssmin', 'watch']);
+    grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'cssmin', 'removelogging', 'watch']);
     grunt.registerTask('test', ['']);
 };
