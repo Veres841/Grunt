@@ -25,21 +25,29 @@ module.exports = function(grunt) {
         },
         
         concat: {
-            options: {
-                stripBanners: true,
-                banner: '/* <%= pkg.name %> -v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */'
-            },
-            
             dists: {
                 src: ['js/file1.js', 'js/file2.js'],
                 dest: 'dest/build.js'
+            }
+        },
+        
+        uglify: {
+            options: {
+                stripBanners: true,
+                banner: '/* <%= pkg.name %> -v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+            },
+            
+            build: {
+                src: 'dest/build.js',
+                dest: 'dest/build.min.js'
             }
         }
     });
     
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     
-    grunt.registerTask('default', ['jshint', 'concat']);
+    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
     grunt.registerTask('test', ['']);
 };
