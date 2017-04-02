@@ -41,13 +41,26 @@ module.exports = function(grunt) {
                 src: 'dest/build.js',
                 dest: 'dest/build.min.js'
             }
+        },
+        
+        cssmin: {
+            with_banner: {
+                options: {
+                    banner: '/* My minified CSS */'
+                },
+                
+                files: {
+                    'dest/style.min.css': ['css/style.css', 'css/style2.css']
+                }
+            }
         }
     });
     
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     
-    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'cssmin']);
     grunt.registerTask('test', ['']);
 };
